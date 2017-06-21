@@ -1,5 +1,7 @@
 body {
     font-family: 'Lato',sans-serif;
+    min-height: 500px;
+    min-width: 500px;
 }
 
 .gradient {
