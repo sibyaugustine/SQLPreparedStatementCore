@@ -2,13 +2,15 @@
 <html>
 <head>
   <title>SQL Prepared Statement Beautify</title>
-  <link rel="stylesheet" href="styles/primer.css">
   <link rel="stylesheet" href="styles/styles.css">
+  <link rel="stylesheet" href="styles/jquery.bootgrid.min.css">
   
   <script src="script/jquery-3.2.1.min.js"></script>
   <script src="script/clipboard.min.js"></script>
-  <script src="script/jquery.steps.min.js"></script>
+  <script src="script/jquery.bootgrid.min.js"></script>
+  <script src="script/jquery.bootgrid.fa.min.js"></script>
   <script src="script/main.js"></script>
+  <script src="script/datatables.js"></script>
 </head>
 
 <body>
@@ -20,16 +22,17 @@
   
   <div id ="main" class="main_section">
 
-  <div id="IpScript">
-    <textarea id="textAreaInpScript" placeholder="Enter your script here!"></textarea>
-  </div>
-    
   <div class="btn_bar">
-     <button id="btn_pertify_copy" class="btn" data-clipboard-action="copy" data-clipboard-target="#textAreaOupScript">Beautify&Copy</button>
+     <button id="btn_pertify_copy" class="btn" data-clipboard-action="copy" data-clipboard-target="#textAreaInpScript">Beautify&Copy</button>
      <button id="btn_pertify" class="btn">Beautify</button>
-     <button id="btn_copy" class="btn" data-clipboard-action="copy" data-clipboard-target="#textAreaOupScript">Copy</button>
+     <button id="btn_copy" class="btn" data-clipboard-action="copy" data-clipboard-target="#textAreaInpScript">Copy</button>
   </div>
-    
+  
+  <div id="IpScript" class="container_main">
+    <div id="inputarea" class="section_input">
+      <textarea id="textAreaInpScript" class='form-control ipMainArea' placeholder="Enter your script here!"></textarea>
+    </div>
+  </div>  
   </div>
 </body>
 </html>
