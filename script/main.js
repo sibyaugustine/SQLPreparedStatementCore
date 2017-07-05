@@ -7,8 +7,6 @@
 
 //Private Variabe for storing input
 var _sInputTextArea="";
-//Private Object Contains key-value pair
-var _aDataValues = [];
 //Private Variable for datatable
 var _oDataSQLTableRef = null;
 
@@ -33,20 +31,14 @@ function onBtnPertifyClick(){
   sInput = _removeLineBreaks(sInput);
   var sSqlPrep = _extractPrepQueryFromInput(sInput);
   var aColPorperties = _extractArrayOfDataFromInput(sInput);
-  var aColumnNames = _extractColoumnsFromInput(sInput);
-  _aDataValues = [];
-  for(var i=0;i<aColumnNames.length;i++)
-  {
-    var oDataValues = {};
-    oDataValues.id = aColumnNames[i].trim();
-    oDataValues.desc = aColPorperties[i].trim();
-    _aDataValues.push(oDataValues);
-  }
 
-  _oDataSQLTableRef.insetIntoTable(_aDataValues);
   var sPritifiedQuery = _prepareQuery(sSqlPrep,aColPorperties);
-  sPritifiedQuery = _wordWrap(sPritifiedQuery,40);
+  sPritifiedQuery = _wordWrap(sPritifiedQuery,80);
   $('#textAreaInpScript').val(sPritifiedQuery);
+
+  var aColumnNames = _extractColoumnsFromInput(sInput);
+  var aKeyValueColumnValues = _extarctColumValuesFromInput(aColumnNames,aColPorperties);
+  _oDataSQLTableRef.insetIntoTable(aKeyValueColumnValues);
 }
 
 function _extractArrayOfDataFromInput(sInput){
@@ -62,7 +54,21 @@ function _extractArrayOfDataFromInput(sInput){
 
 function _extractColoumnsFromInput(sInput){
   var aData_Arr_values = [];
-  var sData_Values = sInput.substring(sInput.indexOf('(')+1,sInput.indexOf(')'));
+  var sData_Values ="";
+  if(sInput.indexOf('INSERT')>-1)
+  {
+    sData_Values = sInput.substring(sInput.indexOf('(')+1,sInput.indexOf(')'));
+  }
+  else
+  {
+    var firstColomnIndex = sInput.indexOf("?");
+    while(sInput.charAt(firstColomnIndex)!=" "){
+	    firstColomnIndex--;
+    }
+    var sColumnNames = sInput.substring(firstColomnIndex,sInput.lastIndexOf("?")+1);
+    var sRemovedSplChars = sColumnNames.replace(/ /g,'').replace(/\?/g,'').replace(/=/g,'');
+    sData_Values = sRemovedSplChars.replace(/(AND|WHERE|OR)/g,",");
+  }
   if(sData_Values)
   {
     aData_Arr_values = sData_Values.split(',');
@@ -93,8 +99,46 @@ function _removeLineBreaks(sInput){
   return sInput.replace(/(\r\n|\n|\r)/gm,"");
 }
 
-function _wordWrap(text,width){
-    var re = new RegExp("([\\w\\s]{" + (width - 2) + ",}?\\w)\\s?\\b", "g")
-    return text.replace(re,"$1\n")
+function _extarctColumValuesFromInput(aColumnNames,aColPorperties){
+  var _aDataValues = [];
+  for(var i=0;i<aColumnNames.length;i++)
+  {
+    var oDataValues = {};
+    oDataValues.id = aColumnNames[i].trim();
+    oDataValues.desc = aColPorperties[i].trim();
+    _aDataValues.push(oDataValues);
+  }
+  return _aDataValues;
 }
+
+function _wordWrap(str, maxWidth) {
+    var newLineStr = "\n"; done = false; res = '';
+    do {                    
+        found = false;
+        // Inserts new line at first whitespace of the line
+        for (i = maxWidth - 1; i >= 0; i--) {
+            if (testWhite(str.charAt(i))) {
+                res = res + [str.slice(0, i), newLineStr].join('');
+                str = str.slice(i + 1);
+                found = true;
+                break;
+            }
+        }
+        // Inserts new line at maxWidth position, the word is too long to wrap
+        if (!found) {
+            res += [str.slice(0, maxWidth), newLineStr].join('');
+            str = str.slice(maxWidth);
+        }
+
+        if (str.length < maxWidth)
+            done = true;
+    } while (!done);
+
+    return res + str;
+}
+
+function testWhite(x) {
+    var white = new RegExp(/^\s$/);
+    return white.test(x.charAt(0));
+};
 })(window);

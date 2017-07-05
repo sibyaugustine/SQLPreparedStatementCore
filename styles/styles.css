@@ -18,18 +18,18 @@ body {
 
 .title {
     color: white;
-    font-size: 64px;
+    /* font-size: 64px; */
     font-weight: 900;
     letter-spacing: -1px;
-    margin: 0 20px 20px;
+    margin: 0;
 }
 
 .subtitle {
     color: #16a085;
-    font-size: 27px;
+    font-size: 17px;
     font-weight: 400;
-    line-height: 30px;
-    margin: 0 20px 20px;
+    /* line-height: 30px; */
+    margin: 0;
 }
 
 .subtitle+.subtitle {
@@ -138,7 +138,7 @@ textarea {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     width: 100%;
-    min-height: 250px;
+    min-height: 450px;
 }
 
 .snippet {
@@ -288,18 +288,18 @@ code {
 }
 
 .main_section{
-  padding: 15px 10px;
+  /* padding: 15px 10px; */
 }
 
 .btn_bar{
-   padding: 10px 0px;
+   padding: 10px 11px 0px;
 }
 
 .section_input{
     float: left;
     width: 60%;
     padding: 10px;
-    border-right: 5px solid red;
+    border-right: 2px solid #59c9f1;
 }
 
 .section_tbl_valus{
