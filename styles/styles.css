@@ -18,18 +18,18 @@ body {
 
 .title {
     color: white;
-    font-size: 64px;
+    /* font-size: 64px; */
     font-weight: 900;
     letter-spacing: -1px;
-    margin: 0 20px 20px;
+    margin: 0;
 }
 
 .subtitle {
     color: #16a085;
-    font-size: 27px;
+    font-size: 17px;
     font-weight: 400;
-    line-height: 30px;
-    margin: 0 20px 20px;
+    /* line-height: 30px; */
+    margin: 0;
 }
 
 .subtitle+.subtitle {
@@ -138,7 +138,7 @@ textarea {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     width: 100%;
-    min-height : 150px;
+    min-height: 450px;
 }
 
 .snippet {
@@ -148,7 +148,7 @@ textarea {
 
 .snippet code {
     font-size: 14px;
-    line-height: 20px;
+    line-height:input_section 20px;
 }
 
 .snippet .btn {
@@ -288,9 +288,33 @@ code {
 }
 
 .main_section{
-  padding: 15px 10px;
+  /* padding: 15px 10px; */
 }
 
 .btn_bar{
-   padding: 10px 0px;
+   padding: 10px 11px 0px;
+}
+
+.section_input{
+    float: left;
+    width: 60%;
+    padding: 10px;
+    border-right: 2px solid #59c9f1;
+}
+
+.section_tbl_valus{
+    float: right;
+    width: 40%;
+    padding: 10px;
+}
+
+.ipMainArea{
+    resize: none;
+}
+
+.container_main{
+     min-height: 70%;
+    min-height: -webkit-calc(100% - 300px);
+    min-height: -moz-calc(100% - 300px);
+    min-height: calc(100% - 300px);
 }
